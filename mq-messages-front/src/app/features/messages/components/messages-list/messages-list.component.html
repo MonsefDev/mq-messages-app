@@ -1,0 +1,106 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Messages MQ</mat-card-title>
+    <mat-card-subtitle>{{ totalElements }} messages</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <!-- Filtres -->
+    <app-message-filters
+      (filtersChange)="onFiltersChange($event)"
+      [isLoading]="isLoading"
+    >
+    </app-message-filters>
+
+    <!-- Tableau -->
+    <div class="table-container" *ngIf="!isLoading; else loadingTemplate">
+      <table mat-table [dataSource]="dataSource" matSort class="messages-table">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>ID</th>
+          <td mat-cell *matCellDef="let message">
+            <span class="message-id">{{ message.id | slice : 0 : 8 }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Timestamp Column -->
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Date/Heure</th>
+          <td mat-cell *matCellDef="let message">
+            {{ message.timestamp | date : "dd/MM/yyyy HH:mm:ss" }}
+          </td>
+        </ng-container>
+
+        <!-- Source Column -->
+        <ng-container matColumnDef="source">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Source</th>
+          <td mat-cell *matCellDef="let message">{{ message.source }}</td>
+        </ng-container>
+
+        <!-- Destination Column -->
+        <ng-container matColumnDef="destination">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Destination</th>
+          <td mat-cell *matCellDef="let message">{{ message.destination }}</td>
+        </ng-container>
+
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Statut</th>
+          <td mat-cell *matCellDef="let message">
+            <mat-chip-set>
+              <mat-chip [class]="'status-' + message.status.toLowerCase()">
+                {{ message.status }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Flow Type Column -->
+        <ng-container matColumnDef="processedFlowType">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
+          <td mat-cell *matCellDef="let message">
+            <mat-chip-set>
+              <mat-chip
+                [class]="'flow-' + message.processedFlowType.toLowerCase()"
+              >
+                {{ message.processedFlowType }}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let message">
+            <button
+              mat-icon-button
+              (click)="openMessageDetail(message); $event.stopPropagation()"
+              [attr.aria-label]="'Voir détails du message ' + message.id"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr
+          mat-row
+          *matRowDef="let message; columns: displayedColumns"
+          (click)="openMessageDetail(message)"
+          class="message-row"
+        ></tr>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 20, 50, 100]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Chargement des messages...</p>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,109 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>Détails du Message</h2>
+  <button
+    mat-icon-button
+    mat-dialog-close
+    [attr.aria-label]="'Fermer la modale'"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<mat-dialog-content *ngIf="message$ | async as message; else loadingTemplate">
+  <div class="message-details">
+    <!-- Informations principales -->
+    <mat-card class="info-card">
+      <mat-card-header>
+        <mat-card-title>Informations Générales</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="info-grid">
+          <div class="info-item">
+            <label>ID:</label>
+            <span class="message-id">{{ message.id }}</span>
+          </div>
+          <div class="info-item">
+            <label>Date/Heure:</label>
+            <span>{{ message.timestamp | date : "dd/MM/yyyy HH:mm:ss" }}</span>
+          </div>
+          <div class="info-item">
+            <label>Source:</label>
+            <span>{{ message.source }}</span>
+          </div>
+          <div class="info-item">
+            <label>Destination:</label>
+            <span>{{ message.destination }}</span>
+          </div>
+          <div class="info-item">
+            <label>Statut:</label>
+            <mat-chip-set>
+              <mat-chip [class]="'status-' + message.status.toLowerCase()">
+                {{ message.status }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="info-item">
+            <label>Type de flux:</label>
+            <mat-chip-set>
+              <mat-chip
+                [class]="'flow-' + message.processedFlowType.toLowerCase()"
+              >
+                {{ message.processedFlowType }}
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="info-item" *ngIf="message.partnerId">
+            <label>Partenaire ID:</label>
+            <span>{{ message.partnerId }}</span>
+          </div>
+          <div class="info-item" *ngIf="message.size">
+            <label>Taille:</label>
+            <span>{{ message.size | number }} bytes</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Headers -->
+    <mat-card
+      class="info-card"
+      *ngIf="message.headers && hasHeaders(message.headers)"
+    >
+      <mat-card-header>
+        <mat-card-title>Headers</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="headers-list">
+          <div
+            class="header-item"
+            *ngFor="let header of getHeaderEntries(message.headers)"
+          >
+            <label>{{ header.key }}:</label>
+            <span>{{ header.value }}</span>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Contenu du message -->
+    <mat-card class="info-card content-card">
+      <mat-card-header>
+        <mat-card-title>Contenu du Message</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="message-content">
+          <pre class="content-text">{{ message.content }}</pre>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</mat-dialog-content>
+
+<ng-template #loadingTemplate>
+  <mat-dialog-content>
+    <div class="loading-container">
+      <mat-spinner></mat-spinner>
+      <p>Chargement des détails...</p>
+    </div>
+  </mat-dialog-content>
+</ng-template>

@@ -1,0 +1,112 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Partenaires MQ</mat-card-title>
+    <mat-card-subtitle>{{partners.length}} partenaires configurés</mat-card-subtitle>
+    <div class="header-actions">
+      <button mat-raised-button color="primary" (click)="openAddPartnerDialog()">
+        <mat-icon>add</mat-icon>
+        Ajouter un partenaire
+      </button>
+    </div>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="table-container" *ngIf="!isLoading; else loadingTemplate">
+      <table mat-table [dataSource]="dataSource" class="partners-table">
+
+        <!-- Alias Column -->
+        <ng-container matColumnDef="alias">
+          <th mat-header-cell *matHeaderCellDef>Alias</th>
+          <td mat-cell *matCellDef="let partner">
+            <strong>{{partner.alias}}</strong>
+          </td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Type</th>
+          <td mat-cell *matCellDef="let partner">{{partner.type}}</td>
+        </ng-container>
+
+        <!-- Direction Column -->
+        <ng-container matColumnDef="direction">
+          <th mat-header-cell *matHeaderCellDef>Direction</th>
+          <td mat-cell *matCellDef="let partner">
+            <mat-chip-set>
+              <mat-chip [class]="'direction-' + partner.direction.toLowerCase()">
+                {{partner.direction}}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Application Column -->
+        <ng-container matColumnDef="application">
+          <th mat-header-cell *matHeaderCellDef>Application</th>
+          <td mat-cell *matCellDef="let partner">{{partner.application}}</td>
+        </ng-container>
+
+        <!-- Flow Type Column -->
+        <ng-container matColumnDef="processedFlowType">
+          <th mat-header-cell *matHeaderCellDef>Type de flux</th>
+          <td mat-cell *matCellDef="let partner">
+            <mat-chip-set>
+              <mat-chip [class]="'flow-' + partner.processedFlowType.toLowerCase()">
+                {{partner.processedFlowType}}
+              </mat-chip>
+            </mat-chip-set>
+          </td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Description</th>
+          <td mat-cell *matCellDef="let partner">
+            <span [matTooltip]="partner.description" class="description-text">
+              {{partner.description | slice:0:50}}{{partner.description.length > 50 ? '...' : ''}}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Created At Column -->
+        <ng-container matColumnDef="createdAt">
+          <th mat-header-cell *matHeaderCellDef>Créé le</th>
+          <td mat-cell *matCellDef="let partner">
+            {{partner.createdAt | date:'dd/MM/yyyy HH:mm'}}
+          </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Actions</th>
+          <td mat-cell *matCellDef="let partner">
+            <button mat-icon-button (click)="editPartner(partner)" [attr.aria-label]="'Modifier le partenaire ' + partner.alias">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="deletePartner(partner)" [attr.aria-label]="'Supprimer le partenaire ' + partner.alias">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let partner; columns: displayedColumns;" class="partner-row"></tr>
+      </table>
+
+      <div *ngIf="partners.length === 0" class="no-data">
+        <mat-icon>business</mat-icon>
+        <p>Aucun partenaire configuré</p>
+        <button mat-raised-button color="primary" (click)="openAddPartnerDialog()">
+          Ajouter le premier partenaire
+        </button>
+      </div>
+    </div>
+
+    <ng-template #loadingTemplate>
+      <div class="loading-container">
+        <mat-spinner></mat-spinner>
+        <p>Chargement des partenaires...</p>
+      </div>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

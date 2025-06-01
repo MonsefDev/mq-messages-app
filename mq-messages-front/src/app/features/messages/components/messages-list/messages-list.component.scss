@@ -1,0 +1,64 @@
+.messages-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+.message-row {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.message-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.message-id {
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.table-container {
+  margin-top: 16px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-processed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.flow-message {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.flow-alerting {
+  background-color: #fff8e1;
+  color: #e65100;
+}
+
+.flow-notification {
+  background-color: #f3e5f5;
+  color: #4a148c;
+}
