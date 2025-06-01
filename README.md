@@ -4,7 +4,7 @@ Application de gestion des messages **IBM MQ Series** avec une interface web mod
 
 ---
 
-## 📦 Architecture du projet
+##  Architecture du projet
 
 MQ-MESSAGES-APP/
 ├── src/ # Backend NestJS (API)
@@ -17,18 +17,17 @@ MQ-MESSAGES-APP/
 
 ---
 
-## ⚙️ Technologies utilisées
+##  Technologies utilisées
 
-- 🔧 **NestJS** — API REST modulaire
-- 🎨 **React** — Interface utilisateur moderne
-- 🧪 **Swagger** — Documentation interactive de l'API
-- 🗃️ **MongoDB** — Base de données NoSQL (`mongodb://localhost:27017`)
+-  **NestJS** — API REST modulaire
+-  **Angular** — Interface utilisateur moderne
+-  **Swagger** — Documentation interactive de l'API
+-  **MongoDB** — Base de données NoSQL (`mongodb://localhost:27017`)
 
 ---
 
-## 🚀 Installation & Lancement
+##  Installation & Lancement
 
-### 📥 Installation des dépendances
 
 ```bash
 # Tout installer (backend + frontend)
@@ -38,7 +37,7 @@ npm run install:all
 npm run install:backend    # Backend uniquement
 npm run install:frontend   # Frontend uniquement
 
-🧪 Lancer en mode développement
+Lancer en mode développement
 
 # Lancer le backend (NestJS, port 3001)
 npm run start:backend
@@ -49,21 +48,21 @@ npm run start:frontend
 # Lancer les deux ensemble
 npm run dev
 
-🏗️ Build pour la production
+ Build pour la production
 npm run build:backend      # Build du backend
 npm run build:frontend     # Build du frontend
 npm run build              # Build complet
 
-🌐 URLs importantes
- 🔧 API Backend : http://localhost:3001
+ URLs importantes
+  API Backend : http://localhost:3001
 
-🎨 Frontend : http://localhost:3000
+ Frontend : http://localhost:3000
 
-📚 Swagger API : http://localhost:3001/api
+ Swagger API : http://localhost:3001/api
 
-🗃️ MongoDB : mongodb://localhost:27017 (par défaut dans l'application)
+ MongoDB : mongodb://localhost:27017 (par défaut dans l'application)
 
-## 🧪 Jeux de test / Utilisateurs de démo
+## jeux de test / Utilisateurs de démo
 
 
 Voici des comptes pour tester les rôles dans l'application :
