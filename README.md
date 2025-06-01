@@ -6,13 +6,14 @@ Application de gestion des messages **IBM MQ Series** avec une interface web mod
 
 ##  Architecture du projet
 
+```text
 MQ-MESSAGES-APP/
-├── src/ # Backend NestJS (API)
-│ ├── messages/ # Module de gestion des messages MQ
-│ ├── partners/ # Module de gestion des partenaires
-│ └── shared/ # Code partagé (DTOs, utils, etc.)
-├── mq-messages-front/ # Frontend React
-└── .vscode/ # Configurations pour VS Code
+├── src/                  # Backend NestJS (API)
+│   ├── messages/         # Module de gestion des messages MQ
+│   ├── partners/         # Module de gestion des partenaires
+│   └── shared/           # Code partagé (DTOs, utils, etc.)
+├── mq-messages-front/    # Frontend React
+└── .vscode/              # Configurations pour VS Code
 
 
 ---
