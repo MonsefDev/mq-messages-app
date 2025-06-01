@@ -1,0 +1,134 @@
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px 0 24px;
+}
+
+.dialog-header h2 {
+  margin: 0;
+}
+
+.message-details {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.info-card {
+  margin-bottom: 16px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-item label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9em;
+}
+
+.message-id {
+  font-family: monospace;
+  font-size: 0.9em;
+  word-break: break-all;
+}
+
+.headers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+}
+
+.header-item label {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 0.9em;
+}
+
+.content-card .mat-mdc-card-content {
+  padding: 0 !important;
+}
+
+.message-content {
+  max-height: 400px;
+  overflow: auto;
+}
+
+.content-text {
+  margin: 0;
+  padding: 16px;
+  background-color: #f5f5f5;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+}
+
+.loading-container p {
+  margin-top: 16px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Status chips styling */
+.status-pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.status-processed {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.status-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Flow type chips styling */
+.flow-message {
+  background-color: #e3f2fd;
+  color: #0d47a1;
+}
+
+.flow-alerting {
+  background-color: #fff8e1;
+  color: #e65100;
+}
+
+.flow-notification {
+  background-color: #f3e5f5;
+  color: #4a148c;
+}
+
+@media (max-width: 600px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+}

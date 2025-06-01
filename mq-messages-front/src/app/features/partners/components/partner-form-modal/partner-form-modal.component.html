@@ -1,0 +1,129 @@
+<div class="dialog-header">
+  <h2 mat-dialog-title>
+    {{ data.isEdit ? "Modifier" : "Ajouter" }} un partenaire
+  </h2>
+  <button
+    mat-icon-button
+    mat-dialog-close
+    [attr.aria-label]="'Fermer la modale'"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <div class="form-grid">
+      <!-- Alias -->
+      <mat-form-field appearance="outline">
+        <mat-label>Alias *</mat-label>
+        <input
+          matInput
+          formControlName="alias"
+          placeholder="Alias du partenaire"
+        />
+        <mat-error *ngIf="partnerForm.get('alias')?.hasError('required')">
+          L'alias est obligatoire
+        </mat-error>
+        <mat-error *ngIf="partnerForm.get('alias')?.hasError('minlength')">
+          L'alias doit contenir au moins 2 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>Type *</mat-label>
+        <input
+          matInput
+          formControlName="type"
+          placeholder="Type du partenaire"
+        />
+        <mat-error *ngIf="partnerForm.get('type')?.hasError('required')">
+          Le type est obligatoire
+        </mat-error>
+        <mat-error *ngIf="partnerForm.get('type')?.hasError('minlength')">
+          Le type doit contenir au moins 2 caractères
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Direction -->
+      <mat-form-field appearance="outline">
+        <mat-label>Direction *</mat-label>
+        <mat-select formControlName="direction">
+          <mat-option
+            *ngFor="let direction of directionOptions"
+            [value]="direction"
+          >
+            {{ direction }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="partnerForm.get('direction')?.hasError('required')">
+          La direction est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Application -->
+      <mat-form-field appearance="outline">
+        <mat-label>Application</mat-label>
+        <input
+          matInput
+          formControlName="application"
+          placeholder="Nom de l'application"
+        />
+      </mat-form-field>
+
+      <!-- Processed Flow Type -->
+      <mat-form-field appearance="outline">
+        <mat-label>Type de flux *</mat-label>
+        <mat-select formControlName="processedFlowType">
+          <mat-option
+            *ngFor="let flowType of flowTypeOptions"
+            [value]="flowType"
+          >
+            {{ flowType }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="partnerForm.get('processedFlowType')?.hasError('required')"
+        >
+          Le type de flux est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Description *</mat-label>
+        <textarea
+          matInput
+          formControlName="description"
+          rows="3"
+          placeholder="Description du partenaire"
+        ></textarea>
+        <mat-error *ngIf="partnerForm.get('description')?.hasError('required')">
+          La description est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="partnerForm.get('description')?.hasError('minlength')"
+        >
+          La description doit contenir au moins 10 caractères
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button type="button" mat-button mat-dialog-close>Annuler</button>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="partnerForm.invalid || isSubmitting"
+    >
+      <mat-icon *ngIf="isSubmitting">hourglass_empty</mat-icon>
+      <mat-icon *ngIf="!isSubmitting">{{
+        data.isEdit ? "save" : "add"
+      }}</mat-icon>
+      {{ data.isEdit ? "Modifier" : "Ajouter" }}
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,0 +1,47 @@
+<div class="login-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Connexion</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="login()">
+        <mat-form-field appearance="outline">
+          <mat-label>Nom d'utilisateur</mat-label>
+          <input
+            matInput
+            [(ngModel)]="username"
+            name="username"
+            required
+            #usernameRef="ngModel"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Mot de passe</mat-label>
+          <input
+            matInput
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+            #passwordRef="ngModel"
+          />
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="loading || !loginForm.valid"
+        >
+          {{ loading ? 'Connexion...' : 'Se connecter' }}
+        </button>
+
+        @if (error) {
+          <p class="error">{{ error }}</p>
+        }
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
